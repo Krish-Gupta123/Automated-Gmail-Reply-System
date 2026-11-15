@@ -2,6 +2,12 @@
 
 An [n8n](https://n8n.io/) workflow that checks Gmail for new messages, classifies each message, generates a category-aware reply with OpenAI, and sends the reply to the original sender.
 
+## Workflow
+
+The diagram below shows the workflow structure. The Gmail Trigger passes incoming email to a classifier, which routes it through a matching AI reply-generation path and then to a Gmail reply node.
+
+![Automated Gmail Reply System workflow diagram](Workflow.png)
+
 ## How it works
 
 1. **Gmail Trigger** polls for new email every minute.
@@ -9,10 +15,10 @@ An [n8n](https://n8n.io/) workflow that checks Gmail for new messages, classifie
    - **Orders** — new or existing order-related messages.
    - **Inquiry** — questions or requests for general information.
    - **Others** — messages that do not fit the first two categories.
-3. **OpenAI** generates a response using the email subject and message context. The workflow uses GPT-4.1 for classification and GPT-4o for reply generation.
+3. **OpenAI** generates a response using the email subject and message context. The workflow uses GPT-4.1 for classification and GPT-4o for reply generation. Each category is routed to its own reply-generation node.
 4. **Gmail Reply** sends the generated text as a reply to the original sender.
 
-The workflow definition is [`Automated gmail reply system.json`](Automated%20gmail%20reply%20system.json).
+The n8n workflow definition is [`Automated gmail reply system.json`](Automated%20gmail%20reply%20system.json), and the diagram is available as [`Workflow.png`](Workflow.png).
 
 ## Requirements
 
